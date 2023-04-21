@@ -1,17 +1,6 @@
 import * as grpc from '@grpc/grpc-js';
-import { GreeterService, IGreeterServer } from '../generate/greeter_grpc_pb';
-import { HelloRequest, HelloReply } from '../generate/greeter_pb';
-
-//protoで定義したServiceを実装するクラス定義。今回はサンプルなのでmainと同じファイル内に同居。
-class GreeterServer implements IGreeterServer {
-  [name: string]: grpc.UntypedHandleCall;
-  sayHello(call: grpc.ServerUnaryCall<HelloRequest, HelloReply>, callback: grpc.sendUnaryData<HelloReply>): void {
-    const reply = new HelloReply();
-    reply.setMessage('Hello ' + call.request.getName());
-    //第一引数がエラーオブジェクト。第二引数がレスポンスオブジェクト。
-    callback(null, reply);
-  }
-}
+import { GreeterService } from '../generate/greeter_grpc_pb';
+import { GreeterServer } from './greeterServer';
 
 //サーバーを起動する。
 function main() {

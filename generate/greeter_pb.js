@@ -21,6 +21,8 @@ var global = (function() {
   return Function('return this')();
 }.call(null));
 
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
+goog.object.extend(proto, google_protobuf_timestamp_pb);
 goog.exportSymbol('proto.greet.HelloReply', null, global);
 goog.exportSymbol('proto.greet.HelloRequest', null, global);
 /**
@@ -227,7 +229,9 @@ proto.greet.HelloReply.prototype.toObject = function(opt_includeInstance) {
  */
 proto.greet.HelloReply.toObject = function(includeInstance, msg) {
   var f, obj = {
-    message: jspb.Message.getFieldWithDefault(msg, 1, "")
+    message: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    currentTime: (f = msg.getCurrentTime()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f),
+    encodedString: msg.getEncodedString_asB64()
   };
 
   if (includeInstance) {
@@ -268,6 +272,15 @@ proto.greet.HelloReply.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setMessage(value);
       break;
+    case 2:
+      var value = new google_protobuf_timestamp_pb.Timestamp;
+      reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
+      msg.setCurrentTime(value);
+      break;
+    case 3:
+      var value = /** @type {!Uint8Array} */ (reader.readBytes());
+      msg.setEncodedString(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -304,6 +317,21 @@ proto.greet.HelloReply.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getCurrentTime();
+  if (f != null) {
+    writer.writeMessage(
+      2,
+      f,
+      google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
+    );
+  }
+  f = message.getEncodedString_asU8();
+  if (f.length > 0) {
+    writer.writeBytes(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -322,6 +350,85 @@ proto.greet.HelloReply.prototype.getMessage = function() {
  */
 proto.greet.HelloReply.prototype.setMessage = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
+};
+
+
+/**
+ * optional google.protobuf.Timestamp current_time = 2;
+ * @return {?proto.google.protobuf.Timestamp}
+ */
+proto.greet.HelloReply.prototype.getCurrentTime = function() {
+  return /** @type{?proto.google.protobuf.Timestamp} */ (
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 2));
+};
+
+
+/**
+ * @param {?proto.google.protobuf.Timestamp|undefined} value
+ * @return {!proto.greet.HelloReply} returns this
+*/
+proto.greet.HelloReply.prototype.setCurrentTime = function(value) {
+  return jspb.Message.setWrapperField(this, 2, value);
+};
+
+
+/**
+ * Clears the message field making it undefined.
+ * @return {!proto.greet.HelloReply} returns this
+ */
+proto.greet.HelloReply.prototype.clearCurrentTime = function() {
+  return this.setCurrentTime(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.greet.HelloReply.prototype.hasCurrentTime = function() {
+  return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional bytes encoded_string = 3;
+ * @return {!(string|Uint8Array)}
+ */
+proto.greet.HelloReply.prototype.getEncodedString = function() {
+  return /** @type {!(string|Uint8Array)} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * optional bytes encoded_string = 3;
+ * This is a type-conversion wrapper around `getEncodedString()`
+ * @return {string}
+ */
+proto.greet.HelloReply.prototype.getEncodedString_asB64 = function() {
+  return /** @type {string} */ (jspb.Message.bytesAsB64(
+      this.getEncodedString()));
+};
+
+
+/**
+ * optional bytes encoded_string = 3;
+ * Note that Uint8Array is not supported on all browsers.
+ * @see http://caniuse.com/Uint8Array
+ * This is a type-conversion wrapper around `getEncodedString()`
+ * @return {!Uint8Array}
+ */
+proto.greet.HelloReply.prototype.getEncodedString_asU8 = function() {
+  return /** @type {!Uint8Array} */ (jspb.Message.bytesAsU8(
+      this.getEncodedString()));
+};
+
+
+/**
+ * @param {!(string|Uint8Array)} value
+ * @return {!proto.greet.HelloReply} returns this
+ */
+proto.greet.HelloReply.prototype.setEncodedString = function(value) {
+  return jspb.Message.setProto3BytesField(this, 3, value);
 };
 
 

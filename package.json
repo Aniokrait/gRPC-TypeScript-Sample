@@ -1,12 +1,13 @@
 {
-  "name": "node_grpc_qiita_verify",
+  "name": "node_grpc_typescrpt_sample",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "pregenerate": "rm -rf generate && mkdir generate",
     "generate": "grpc_tools_node_protoc --js_out=import_style=commonjs,binary:./generate --grpc_out=grpc_js:./generate --ts_out=grpc_js:./generate -I ./proto ./proto/*.proto",
-    "start": "ts-node src/server.ts"
+    "start": "ts-node src/server.ts",
+    "client": "ts-node src/client.ts"
   },
   "keywords": [],
   "author": "",

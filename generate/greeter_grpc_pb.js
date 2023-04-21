@@ -3,6 +3,7 @@
 'use strict';
 var grpc = require('@grpc/grpc-js');
 var greeter_pb = require('./greeter_pb.js');
+var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 
 function serialize_greet_HelloReply(arg) {
   if (!(arg instanceof greeter_pb.HelloReply)) {

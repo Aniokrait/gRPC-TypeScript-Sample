@@ -5,6 +5,7 @@
 /* eslint-disable */
 
 import * as jspb from "google-protobuf";
+import * as google_protobuf_timestamp_pb from "google-protobuf/google/protobuf/timestamp_pb";
 
 export class HelloRequest extends jspb.Message { 
     getName(): string;
@@ -30,6 +31,15 @@ export class HelloReply extends jspb.Message {
     getMessage(): string;
     setMessage(value: string): HelloReply;
 
+    hasCurrentTime(): boolean;
+    clearCurrentTime(): void;
+    getCurrentTime(): google_protobuf_timestamp_pb.Timestamp | undefined;
+    setCurrentTime(value?: google_protobuf_timestamp_pb.Timestamp): HelloReply;
+    getEncodedString(): Uint8Array | string;
+    getEncodedString_asU8(): Uint8Array;
+    getEncodedString_asB64(): string;
+    setEncodedString(value: Uint8Array | string): HelloReply;
+
     serializeBinary(): Uint8Array;
     toObject(includeInstance?: boolean): HelloReply.AsObject;
     static toObject(includeInstance: boolean, msg: HelloReply): HelloReply.AsObject;
@@ -43,5 +53,7 @@ export class HelloReply extends jspb.Message {
 export namespace HelloReply {
     export type AsObject = {
         message: string,
+        currentTime?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+        encodedString: Uint8Array | string,
     }
 }
